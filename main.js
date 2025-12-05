@@ -22,8 +22,11 @@ const ctx = canvas.getContext('2d');
 function isMobile() {
   return /Mobi|Android|iPhone|iPad|iPod|Opera Mini|IEMobile|Mobile/i.test(navigator.userAgent);
 }
-const GRAVITY = isMobile() ? 0.8 : 0.5;
-const FLAP = isMobile() ? -12 : -8;
+function isMobileChrome() {
+  return isMobile() && /Chrome/i.test(navigator.userAgent);
+}
+const GRAVITY = isMobileChrome() ? 0.8 : 0.5;
+const FLAP = isMobileChrome() ? -12 : -8;
 const PIPE_GAP = 140;
 const PIPE_WIDTH = 60;
 const PIPE_SPEED = 2.5;
