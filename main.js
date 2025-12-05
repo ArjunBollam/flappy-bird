@@ -25,8 +25,9 @@ function isMobile() {
 function isMobileChrome() {
   return isMobile() && /Chrome/i.test(navigator.userAgent);
 }
-const GRAVITY = isMobileChrome() ? 0.8 : 0.5;
-const FLAP = isMobileChrome() ? -12 : -8;
+// Slightly increase gravity/flap for all mobile, more for Chrome mobile
+const GRAVITY = isMobileChrome() ? 0.8 : (isMobile() ? 0.65 : 0.5);
+const FLAP = isMobileChrome() ? -12 : (isMobile() ? -9 : -8);
 const PIPE_GAP = 140;
 const PIPE_WIDTH = 60;
 const PIPE_SPEED = 2.5;
@@ -197,14 +198,22 @@ function draw() {
     ctx.fillText('Game Over', canvas.width / 2, canvas.height / 2 - 40);
     ctx.font = '24px Arial';
     ctx.fillStyle = '#fff';
-    ctx.fillText('Press Space to Restart', canvas.width / 2, canvas.height / 2);
+    if (isMobile()) {
+      ctx.fillText('Touch to Restart', canvas.width / 2, canvas.height / 2);
+    } else {
+      ctx.fillText('Press Space to Restart', canvas.width / 2, canvas.height / 2);
+    }
   } else if (!started) {
     ctx.font = '32px Arial Black';
     ctx.fillStyle = '#fff';
     ctx.textAlign = 'center';
     ctx.fillText('Flappy Bird', canvas.width / 2, canvas.height / 2 - 60);
     ctx.font = '20px Arial';
-    ctx.fillText('Press Space to Flap', canvas.width / 2, canvas.height / 2);
+    if (isMobile()) {
+      ctx.fillText('Touch to Flap', canvas.width / 2, canvas.height / 2);
+    } else {
+      ctx.fillText('Press Space to Flap', canvas.width / 2, canvas.height / 2);
+    }
   }
 }
 
@@ -230,10 +239,18 @@ document.addEventListener('keydown', function(e) {
 // Mobile tap/touch support (fixed canvas size)
 canvas.addEventListener('touchstart', function(e) {
   e.preventDefault();
-  if (!started) started = true;
+  if (!started) {
+    started = true;
+    birdV = FLAP;
+    playJumpSound();
+    return;
+  }
   if (gameOver) {
     resetGame();
     started = true;
+    birdV = FLAP;
+    playJumpSound();
+    return;
   }
   birdV = FLAP;
   playJumpSound();
