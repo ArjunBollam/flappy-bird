@@ -141,12 +141,11 @@ function update() {
     ) {
       gameOver = true;
     }
-    // Score
-    if (!pipe.passed && pipe.x + PIPE_WIDTH < BIRD_X) {
+    // Score (only update if not game over)
+    if (!gameOver && !pipe.passed && pipe.x + PIPE_WIDTH < BIRD_X) {
       score++;
       pipe.passed = true;
-      // Only update high score if not game over
-      if (!gameOver && score > highScore) highScore = score;
+      if (score > highScore) highScore = score;
     }
   }
   // Remove off-screen pipes
@@ -219,6 +218,30 @@ document.addEventListener('keydown', function(e) {
     birdV = FLAP;
     playJumpSound();
   }
+});
+
+// Mobile tap/touch support (fixed canvas size)
+canvas.addEventListener('touchstart', function(e) {
+  e.preventDefault();
+  if (!started) started = true;
+  if (gameOver) {
+    resetGame();
+    started = true;
+  }
+  birdV = FLAP;
+  playJumpSound();
+});
+
+// Mobile tap/touch support
+canvas.addEventListener('touchstart', function(e) {
+  e.preventDefault();
+  if (!started) started = true;
+  if (gameOver) {
+    resetGame();
+    started = true;
+  }
+  birdV = FLAP;
+  playJumpSound();
 });
 
 canvas.addEventListener('click', function(e) {
