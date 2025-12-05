@@ -18,8 +18,12 @@ const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
 // Game constants
-const GRAVITY = 0.5;
-const FLAP = -8;
+// Use different physics for mobile vs desktop
+function isMobile() {
+  return /Mobi|Android|iPhone|iPad|iPod|Opera Mini|IEMobile|Mobile/i.test(navigator.userAgent);
+}
+const GRAVITY = isMobile() ? 0.8 : 0.5;
+const FLAP = isMobile() ? -12 : -8;
 const PIPE_GAP = 140;
 const PIPE_WIDTH = 60;
 const PIPE_SPEED = 2.5;
