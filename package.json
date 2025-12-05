@@ -1,0 +1,9 @@
+{
+  "name": "flappy-bird",
+  "version": "1.0.0",
+  "description": "A Flappy Bird clone using HTML5 Canvas and JavaScript.",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {}
+}
