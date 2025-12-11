@@ -26,20 +26,17 @@
     <script src="playcanvas-stable.min.js"></script>
     <script src="__settings__.js"></script>
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9MH7SB6EF5"></script>
+    <!-- Vercel Analytics -->
+    <script defer src="https://vercel.com/analytics/script.js"></script>
+      <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YCBWXB9Y5R"></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-        gtag('config', 'G-9MH7SB6EF5');
+    gtag('config', 'G-YCBWXB9Y5R');
     </script>
-
-    <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2446035213984900" crossorigin="anonymous"></script>
 </head>
 
 <body>
